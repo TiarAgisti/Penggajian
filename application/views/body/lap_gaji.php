@@ -61,7 +61,7 @@
     <th>SAKIT</th>
     <th>ALPA/MANGKIR</th>
   	<th>POTONGAN</th>
-    <th>GAJI BERSIH</th>
+    <th>TOTAL BAYAR</th>
   </tr>
   <?php
   	$no=1;
@@ -74,7 +74,7 @@
 
   		<tr>
         	<td><?php echo $no++;?></td>
-            <td><?php echo $db->NmKaryawan;?></td>
+            <td><?php echo $db->NmKaryawan;?></td>  
             <td><?php echo $db->NmJabatan;?></td> 
             <td><?php echo number_format($db->GajiPokok);?></td>
             <td><?php echo number_format($db->TotalTunjangan);?></td>

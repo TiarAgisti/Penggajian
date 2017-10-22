@@ -43,7 +43,7 @@ function __construct(){
 
  }
 
-  function hapus()
+ function hapus()
  {
  	$id = $_POST['id'];
 
@@ -87,28 +87,46 @@ function __construct(){
 	$data['KdPotongan']= $get_kode_potongan;
  	$data['JenisPotongan'] = $jenis_potongan;
 	$data['TotalPotongan'] = $total_potongan;
+
+	$sql = "Select JenisPotongan From Potongan where JenisPotongan =  '$jenis_potongan'";
+	$row = $this->db->query($sql)->row();
+	// print_r($row);
+
+	if ($row->JenisPotongan ==  $jenis_potongan)
+	{
+		$this->session->set_flashdata("msg", "<div class='alert bg-danger' role='alert'>
+	    <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
+	    <svg class='glyph stroked empty-message'><use xlink:href='#stroked-empty-message'></use></svg> Jenis Potongan sudah terdaftar.
+	    </div>");
+		redirect('potongan/potongan_list');
+	}
+	else
+	{
+		$this->db->trans_start();
+
+ 		$this->db->insert('potongan', $data);
+
+ 		$this->db->trans_complete();
+
+	 	if ($this->db->trans_status() === FALSE)
+		{
+			$this->session->set_flashdata("msg", "<div class='alert bg-danger' role='alert'>
+		    <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
+		    <svg class='glyph stroked empty-message'><use xlink:href='#stroked-empty-message'></use></svg> Data gagal tersimpan.
+		    </div>");
+			redirect('potongan/potongan_list');	
+		} 
+		else 
+		{
+			$this->session->set_flashdata("msg", "<div class='alert bg-success' role='alert'>
+		    <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
+		    <svg class='glyph stroked empty-message'><use xlink:href='#stroked-empty-message'></use></svg> Data  tersimpan.
+		    </div>");
+			redirect('potongan/potongan_list');	
+		}	
+	}
 	
- 	$this->db->trans_start();
-
- 	$this->db->insert('potongan', $data);
-
- 	$this->db->trans_complete();
-
- 	if ($this->db->trans_status() === FALSE)
-			{
-				$this->session->set_flashdata("msg", "<div class='alert bg-danger' role='alert'>
-			    <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
-			    <svg class='glyph stroked empty-message'><use xlink:href='#stroked-empty-message'></use></svg> Data gagal tersimpan.
-			    </div>");
-				redirect('potongan/potongan_list');	
-			} else 
-			{
-				$this->session->set_flashdata("msg", "<div class='alert bg-success' role='alert'>
-			    <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
-			    <svg class='glyph stroked empty-message'><use xlink:href='#stroked-empty-message'></use></svg> Data  tersimpan.
-			    </div>");
-				redirect('potongan/potongan_list');	
-			}
+ 	
 		
  }
 

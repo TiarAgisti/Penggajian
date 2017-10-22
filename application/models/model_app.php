@@ -147,7 +147,7 @@ class Model_app extends CI_Model{
 								from karyawan A
 								left join jabatan B on B.KdJabatan=A.KdJabatan
 								left join pendidikan C on C.KdPendidikan=A.KdPendidikan
-								Left Join Golongan D on D.KdGolongan = A.KdGolongan
+								Left Join golongan D on D.KdGolongan = A.KdGolongan
 								Left join tunjangan E on E.KdTunjangan = A.KdTunjangan
 								ORDER BY A.KdKaryawan');
         return $query->result();

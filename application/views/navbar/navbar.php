@@ -7,7 +7,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="<?php echo base_url();?>home"><span>Penggajian</span> | PT. Trikarya Cemerlang</a>
+				<a class="navbar-brand" href="<?php echo base_url();?>home"><span>Penggajian</span> | PT. Tiar Technologi</a>
 				<ul class="user-menu">
 					<li class="dropdown pull-right">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg> <?php echo $this->session->userdata('nama');?> <span class="caret"></span></a>

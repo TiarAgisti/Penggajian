@@ -54,14 +54,29 @@
   	foreach($detail_absensi->result() as $db)
 	{
 		$pot_sakit = "select count(Sakit) as sakit from detail_absensi 
-					  where Sakit <> '' and TglAbsen Between '$tgl_awal' and '$tgl_akhir' and KdKaryawan = '$db->KdKaryawan' ";
+					  where TglAbsen Between '$tgl_awal' and '$tgl_akhir'  and Sakit <> '' and KdKaryawan = '$db->KdKaryawan'";
 		$row_sakit = $this->db->query($pot_sakit)->row();
 		
 		$pot_alpa = "select count(Alpa) as alpa from detail_absensi 
-					  where Alpa <> '' and TglAbsen Between '$tgl_awal' and '$tgl_akhir' and KdKaryawan = '$db->KdKaryawan'";
+					  where TglAbsen Between '$tgl_awal' and '$tgl_akhir' and Alpa <> '' and KdKaryawan = '$db->KdKaryawan'";
 		$row_alpa = $this->db->query($pot_alpa)->row();
+
+    $pot_sakit = "select TotalPotongan from potongan where JenisPotongan = 'SAKIT'";
+    $pot_sakit = $this->db->query($pot_sakit)->row();
+    $pot_alpa = "select TotalPotongan from potongan where JenisPotongan = 'MANGKIR'";
+    $pot_alpa = $this->db->query($pot_alpa)->row();
 		
-		$potongan = ($row_sakit->sakit*$sakit) + ($row_alpa->alpa*$alpa);
+
+    if($row_sakit <> '0' && $row_alpa == '0')
+    {
+      $potongan = $row_sakit->sakit * $pot_sakit->TotalPotongan;
+    }
+
+    else if($row_alpa <> '0' && $row_sakit <> '0')
+    { 
+      $potongan = ($row_alpa->alpa * $pot_alpa->TotalPotongan) + ($row_sakit->sakit * $pot_sakit->TotalPotongan);
+    }
+		// $potongan = ($row_sakit->sakit*$sakit) + ($row_alpa->alpa*$alpa);
   ?>
       <tr>
         <td class="">NAMA</td>

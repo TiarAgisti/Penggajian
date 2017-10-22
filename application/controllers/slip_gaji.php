@@ -29,7 +29,7 @@ function gaji_list()
         $data['sidebar'] = "sidebar/sidebar";
         $data['body'] = "body/slip_gaji";
 
-        $sql = "select A.KdKaryawan,A.NmKaryawan,A.KdJabatan,B.NmJabatan,A.KdGolongan,A.KdPendidikan
+        $sql = "select DISTINCT A.KdKaryawan,A.NmKaryawan,A.KdJabatan,B.NmJabatan,A.KdGolongan,A.KdPendidikan
 				,C.TotalTunjangan,A.GajiPokok
 				from karyawan A
 				LEFT JOIN jabatan B on B.KdJabatan = A.KdJabatan

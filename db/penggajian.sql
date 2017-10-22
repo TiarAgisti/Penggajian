@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 19, 2017 at 02:07 AM
+-- Generation Time: Oct 19, 2017 at 06:19 PM
 -- Server version: 5.6.21
 -- PHP Version: 5.5.19
 
@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `detail_absensi` (
   `Alpa` varchar(10) DEFAULT NULL,
   `Keterangan` varchar(255) DEFAULT NULL,
   `TglAbsen` date DEFAULT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `detail_absensi`
@@ -44,7 +44,13 @@ INSERT INTO `detail_absensi` (`Id`, `KdKaryawan`, `Hadir`, `Sakit`, `Alpa`, `Ket
 (8, 'K0001', NULL, '1', NULL, NULL, '2017-04-30'),
 (7, 'K0002', '1', NULL, NULL, NULL, '2017-04-30'),
 (14, 'K0001', NULL, '1', NULL, 'C:/xampp/htdocs/penggajian-v3/gambar/WhatsApp Image 2017-08-11 at 11.37_.00_.jpeg', '2017-10-09'),
-(15, 'K0002', NULL, '1', NULL, 'C:/xampp/htdocs/penggajian-v3/gambar/WhatsApp Image 2017-08-11 at 11.37_.10_.jpeg', '2017-10-09');
+(15, 'K0002', NULL, '1', NULL, 'C:/xampp/htdocs/penggajian-v3/gambar/WhatsApp Image 2017-08-11 at 11.37_.10_.jpeg', '2017-10-09'),
+(16, 'K0001', '1', NULL, NULL, NULL, '2017-10-01'),
+(17, 'K0002', NULL, '1', NULL, 'C:/xampp/htdocs/penggajian/gambar/', '2017-10-01'),
+(18, 'K0001', NULL, NULL, '1', NULL, '2017-10-01'),
+(19, 'K0002', NULL, NULL, '1', NULL, '2017-10-01'),
+(20, 'K0001', NULL, '1', NULL, 'C:/xampp/htdocs/penggajian/gambar/', '2017-10-19'),
+(21, 'K0002', NULL, '1', NULL, 'C:/xampp/htdocs/penggajian/gambar/', '2017-10-19');
 
 -- --------------------------------------------------------
 
@@ -111,17 +117,7 @@ CREATE TABLE IF NOT EXISTS `karyawan` (
 
 INSERT INTO `karyawan` (`KdKaryawan`, `KdGolongan`, `KdJabatan`, `KdPendidikan`, `KdTunjangan`, `NmKaryawan`, `NoHp`, `TglLahir`, `Alamat`, `JenisKelamin`, `Status`, `Agama`, `GajiPokok`) VALUES
 ('K0002', 'P0001', 'J0002', 'P0001', 'T0001', 'TIAR', '085817579282', '2017-09-01', 'BINONG', 'L', 'SINGLE', 'ISLAM', '10000000.00'),
-('K0001', 'P0001', 'J0002', 'P0001', 'T0001', 'ANWAR', '08567449461', '2016-11-30', 'JLN.PAJARAN 1 NO 25 RT 01/03 KEC.JATIUWUNG KEL.GANDASARI KP.RAWACANA', 'L', 'MENIKAH', 'ISLAM', '10000.00');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `keluarga`
---
-
-CREATE TABLE IF NOT EXISTS `keluarga` (
-`Id` int(11) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+('K0001', 'P0001', 'J0002', 'P0001', 'T0001', 'ANWAR', '08567449461', '2016-11-30', 'JLN.PAJARAN 1 NO 25 RT 01/03 KEC.JATIUWUNG KEL.GANDASARI KP.RAWACANA', 'L', 'MENIKAH', 'ISLAM', '1000000.00');
 
 -- --------------------------------------------------------
 
@@ -144,23 +140,12 @@ INSERT INTO `pendidikan` (`KdPendidikan`, `NmPendidikan`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `posisi_karyawan`
---
-
-CREATE TABLE IF NOT EXISTS `posisi_karyawan` (
-  `KdPosisi` varchar(12) NOT NULL DEFAULT '',
-  `NmPosisi` varchar(255) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `potongan`
 --
 
 CREATE TABLE IF NOT EXISTS `potongan` (
   `KdPotongan` varchar(12) NOT NULL DEFAULT '',
-  `JenisPotongan` varchar(255) DEFAULT NULL,
+  `JenisPotongan` varchar(255) NOT NULL,
   `TotalPotongan` decimal(18,2) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
@@ -169,8 +154,8 @@ CREATE TABLE IF NOT EXISTS `potongan` (
 --
 
 INSERT INTO `potongan` (`KdPotongan`, `JenisPotongan`, `TotalPotongan`) VALUES
-('T0002', 'MANGKIR', '10000.00'),
-('T0003', 'SAKIT', '100000.00');
+('T0002', 'SAKIT', '12000.00'),
+('T0004', 'MANGKIR', '1000.00');
 
 -- --------------------------------------------------------
 
@@ -243,22 +228,10 @@ ALTER TABLE `karyawan`
  ADD PRIMARY KEY (`KdKaryawan`);
 
 --
--- Indexes for table `keluarga`
---
-ALTER TABLE `keluarga`
- ADD PRIMARY KEY (`Id`);
-
---
 -- Indexes for table `pendidikan`
 --
 ALTER TABLE `pendidikan`
  ADD PRIMARY KEY (`KdPendidikan`);
-
---
--- Indexes for table `posisi_karyawan`
---
-ALTER TABLE `posisi_karyawan`
- ADD PRIMARY KEY (`KdPosisi`);
 
 --
 -- Indexes for table `potongan`
@@ -280,12 +253,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `detail_absensi`
 --
 ALTER TABLE `detail_absensi`
-MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=16;
---
--- AUTO_INCREMENT for table `keluarga`
---
-ALTER TABLE `keluarga`
-MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=22;
 --
 -- AUTO_INCREMENT for table `user`
 --
